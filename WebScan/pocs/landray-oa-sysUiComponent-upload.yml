@@ -1,0 +1,12 @@
+name: poc-yaml-landray-oa-sysUiComponent-upload
+rules:
+  - method: GET
+    path: /sys/ui/sys_ui_component/sysUiComponent.do?method=getThemeInfo&s_ajax=true
+    expression: |
+      response.status == 200 && "status".bmatches(response.body)
+detail:
+  author: test
+  info: 
+    需要构造zip字节数据包，详情参考python脚本
+  links:
+    - https://mp.weixin.qq.com/s/xhwmFuItG8ZoiuGrwR5bnw

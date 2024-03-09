@@ -1,0 +1,13 @@
+name: poc-yaml-yonyou-grp-PayReturnForWcp-xxe-rce
+rules:
+  - method: GET
+    path: /servlet/PayReturnForWcp
+    follow_redirects: false
+    expression: |
+      response.status == 200
+detail:
+    info: |
+      粗略判断，访问接口访问空白，要进行漏洞利用才能确定是否存在，参考本地用友笔记 用友GRP-U8 PayReturnForWcp-xxe-RCE
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/wKij_4b4gbU_qUkXzabbXg

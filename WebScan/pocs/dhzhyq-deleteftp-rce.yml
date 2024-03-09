@@ -1,0 +1,13 @@
+name: poc-yaml-dhzhyq-deleteFtp-rce
+rules:
+  - method: GET
+    path: /CardSolution/card/accessControl/swingCardRecord/deleteFtp
+    follow_redirects: false
+    expression: |
+      response.status == 405
+detail:
+    info: |
+      访问接口看看在不在，可能会有误报，但是比直接打poc动静小点，需要手动利用
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/pEEFGAWLqkEtHPFDbrAiCQ

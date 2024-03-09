@@ -1,0 +1,14 @@
+name: poc-yaml-Kingdee-k3cloud-ScpSupRegHandler-file-upload
+rules:
+  - method: GET
+    path: /k3cloud/SRM/ScpSupRegHandler
+    expression: |
+      response.status == 200 && response.body.bcontains(b"\"IsSuccess\": true,")
+detail:
+  author: test
+  info: |
+    fofa: icon_hash="-1629133697" && title=="金蝶云星空"
+    没成功过，接口存在，上传提示：获取用于供应商协同供应商注册的第三方系统授权应用ID失败！请联系系统管理员。
+    拼接上传文件的地址：http://127.0.0.1/K3Cloud/uploadfiles/76527.asp
+  links:
+    - https://mp.weixin.qq.com/s/R9XUJgRPhJcfydIDarlLWA

